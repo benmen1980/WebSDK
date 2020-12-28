@@ -55,29 +55,30 @@
 <script src="https://cdn.priority-software.com/upgrades/var/api/head/priorityapp.nocache.js"></script>
 <script>
 
+    // create blob out of web image
+    var MY_URL = 'https://cc-prod.scene7.com/is/image/CCProdAuthor/Flower-photography_P1_900x420?$pjpeg$&jpegSize=200&wid=900';
+    console.log(MY_URL);
+    var blob = null
+    var xhr = new XMLHttpRequest()
+    xhr.open("GET", MY_URL)
+    xhr.responseType = "blob"
+    xhr.onload = function()
+    {
+        blob = xhr.response
+      //  LoadAndDisplayFile(blob)
+        console.log(blob);
+    }
+    xhr.send()
+
     let mainFormHandler;
     let subform;
     function fieldChangeHandler(event){
-        image_url  = 'https://img.ltwebstatic.com/images3_pi/2020/02/12/15815005210dc126230f8d5d7fb23f909a3121d300_thumbnail_600x.webp';
-        function toDataURL(url) {
-            return fetch(url).then((response) => {
-                return response.blob();
-            }).then(blob => {
-                return URL.createObjectURL(blob);
-            });
-        }
-
-        let dfile =  toDataURL(image_url).then(
-            function(){
-                console.log(dfile);
-            }
-        );
          subform =   mainFormHandler.startSubForm('EXTFILES',null,null,function(subform){
             // console.log(obj);
              file_obj = event.target.files[0];
              console.log('file path= '+file_obj.mozFullPath);
-
-             let uploadResult =  subform.uploadFile(file_obj,function(){
+             blob.name = "imageFilename.jpg"
+             let uploadResult =  subform.uploadFile(blob,function(){
                  console.log('on progress...');
              },async function (fileUploadResult){
                  console.log('im after upload staert...');

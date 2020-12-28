@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var MY_URL = 'https://img.ltwebstatic.com/images3_pi/2020/02/12/15815005210dc126230f8d5d7fb23f909a3121d300_thumbnail_600x.webp';
+    console.log(MY_URL);
+    var blob = null
+    var xhr = new XMLHttpRequest()
+    xhr.open("GET", MY_URL)
+    xhr.responseType = "blob"
+    xhr.onload = function()
+    {
+        blob = xhr.response
+       // LoadAndDisplayFile(blob)
+        console.log(blob);
+    }
+    console.log(xhr);
+    xhr.send()
+</script>
+</html>
